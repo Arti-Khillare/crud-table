@@ -1,0 +1,63 @@
+// .chart-container {
+//     margin-top: 20px;
+// }
+  
+
+.p-dialog-content {
+    width: 500px;
+    margin: auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+  
+.p-field {
+  margin-bottom: 1.5rem;
+}
+  
+.p-mt-3 {
+    margin-top: 1.5rem;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem; /* Add spacing between table and chart */
+    margin: 1rem;
+  }
+  
+  .table-container {
+    flex: 1; /* Take equal space as chart container */
+    max-width: 50%; /* Restrict width */
+  }
+  
+  .chart-container {
+    flex: 1; /* Take equal space as table container */
+    max-width: 50%; /* Restrict width */
+    display: flex;
+    justify-content: center; /* Center the chart */
+    align-items: center;
+  }
+  
+  p-table {
+    width: 100%; /* Ensure table takes full width of its container */
+  }
+  
+  ngx-charts-bar-vertical {
+    width: 100%; /* Ensure the chart takes full width of its container */
+    height: 30rem; /* Set a fixed height for the chart */
+  }
+
+  .action-buttons {
+    display: flex;
+  }
+  
+  p-button {
+    min-width: 5rem; 
+    height: 2.5rem; 
+    text-align: center;
+  }
+  
+  
+  

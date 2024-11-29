@@ -1,0 +1,105 @@
+<p-button (click)="showDialog()" size="small" label="Add New Product"/>
+
+@if(showModal) {
+    <div class="p-dialog-content p-fluid p-grid p-justify-center">
+        <div class="p-fluid"><h2>{{ isEdit ? 'Update Product' : 'Add Product' }}</h2></div>
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+            <div class="p-field">
+                 <label for="productName">Product Name</label>
+                 <input 
+                   id="productName" 
+                   type="text" 
+                   pInputText 
+                   formControlName="name" 
+                   placeholder="Enter product name"/>
+                 @if(productForm.controls['name'].invalid && productForm.controls['name'].touched) {
+                    <small class="p-error">Product name is required</small>
+                 }
+            </div>
+            <div class="p-field">
+                <label for="category">Category</label>
+                <p-dropdown  
+                   id="category"
+                   [options]="categories" 
+                   formControlName="category" 
+                   placeholder="Select a category">
+                </p-dropdown>
+                @if(productForm.controls['category'].invalid && productForm.controls['category'].touched) {
+                    <small class="p-error">Category is required</small>
+                }
+            </div>
+            <div class="p-field">
+                <label for="price">Price</label>
+                <input
+                  id="price"
+                  type="number"
+                  pInputText
+                  formControlName="price"
+                  placeholder="Enter product price"
+                />
+                @if(productForm.controls['price'].invalid && productForm.controls['price'].touched){
+                    <small class="p-error">Price is required and must be greater than 0</small>
+                }
+              </div>
+              <button
+                type="submit"
+                pButton
+                label="{{ isEdit ? 'Update' : 'Add' }}"
+                [disabled]="productForm.invalid"
+                class="p-mt-3"
+            ></button>
+        </form>
+    </div>
+}
+  
+<div class="container">
+    <div class="table-container">
+        <p-table [value]="products" [tableStyle]="{'min-width' : '50rem'}" [responsiveLayout]="'scroll'">
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center justify-content-between">
+                    Products
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.category }}</td>
+                <td>
+                <div class="action-buttons">
+                    <p-button (click)="onEdit(product)" label="Edit" [raised]="true"  size="small" severity="success" />
+                    <p-button (click)="onDelete(product.id)" label="Delete" [raised]="true"  size="small" severity="danger" />
+                </div>
+                </td>
+            </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+                    In total there are {{products ? products.length : 0 }} products.
+                </div>
+            </ng-template>
+        </p-table>
+  </div>
+  
+  <div class="chart-container">
+    <ngx-charts-bar-vertical
+      [results]="chartData"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="true"
+      [showXAxisLabel]="true"
+      [xAxisLabel]="'Product'"
+      [showYAxisLabel]="true"
+      [yAxisLabel]="'Price'"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+</div>
